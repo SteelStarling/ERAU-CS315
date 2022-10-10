@@ -1,0 +1,196 @@
+Script started on Mon 19 Sept 2022 04:08:17 PM MST
+[?1034hsh-4.2$ cat -n hancockTaylor_hw0.c
+     1	/*
+     2	 * File:    hancockTaylor_hw0.c
+     3	 * Project: Working with linked lists and how to traverse them
+     4	 * Author:  Taylor Hancock
+     5	 * Version: 19 September, 2022 
+     6	 */
+     7	
+     8	#include <stdio.h>  /* for printf */
+     9	#include <stdlib.h> /* for malloc, free, NULL */
+    10	#include "link.h"
+    11	
+    12	typedef struct {
+    13	    Link* head;
+    14	} LinkedList;
+    15	
+    16	/* helper functions */
+    17	Link* getNewLink(int value, Link* next);
+    18	void tailRecursivePrint(const Link* l);
+    19	
+    20	/* functions on a LinkedList */
+    21	void listInit(LinkedList* list);
+    22	void listAddValue(LinkedList* list, int value);
+    23	void listAddArray(LinkedList* list, const int array[], int arrayLen);
+    24	void listPrint(const LinkedList* list);
+    25	void listPrintReverse(const LinkedList* list);
+    26	int  listGetSum(const LinkedList* list);
+    27	void listFree(LinkedList* list);
+    28	
+    29	/* initialize the variable(s) in the LinkedList */
+    30	void listInit(LinkedList* list) {
+    31	    if (list != NULL)
+    32	        list->head = NULL;
+    33	}
+    34	
+    35	/* list function that uses tail recursive helper function */
+    36	void listPrintReverse(const LinkedList* list) {
+    37	    tailRecursivePrint(list->head);
+    38	    printf("\n");
+    39	}
+    40	
+    41	int main() {
+    42	    LinkedList myList;
+    43	    int array[6] = {7, 1, -4, 16, 0, 3};
+    44	    int arrLen = 6;
+    45	    listInit(&myList);
+    46	    listAddValue(&myList, -2);
+    47	    listPrint(&myList);
+    48	    listAddArray(&myList, array, arrLen);
+    49	    listPrint(&myList);
+    50	    listPrintReverse(&myList);
+    51	    printf("The sum is: %d\n", listGetSum(&myList));
+    52	    listFree(&myList);
+    53	    if (myList.head != NULL) {
+    54	        printf("Problem with listFree(): myList isn't empty!\n");
+    55      }
+    56	    return EXIT_SUCCESS;
+    57	}
+    58
+    59	
+    60	/* Function: getNewLin  k
+    61	 * Purpose:  Adds a new link to the linked list with specified value, returning a pointer to itself
+    62	 * Argument: value - int containing value for next link
+    63	 * Argument: next  - Link* pointing to next value to link to
+    64	 * Returns:  Returns a pointer to itself
+    65	 */
+    66	Link* getNewLink(int value, Link* next) {
+    67	    /* allocate memory to newLink */
+    68	    Link* newLink = (Link*)malloc(sizeof(Link));
+    69	
+    70	    /* fill newLink with data */
+    71	    newLink->next = next;
+    72	    newLink->value = value;
+    73	
+    74	    /* return pointer to newly created link */
+    75	    return newLink;
+    76	}
+    77	
+    78	/* Function: tailRecursivePrint
+    79	 * Purpose:  Prints the values of a LinkedList in reverse order via recursion
+    80	 * Argument: l - Link* pointing to the Link to print this time
+    81	 * Returns:  N/A
+    82	 */
+    83	void tailRecursivePrint(const Link* l) {
+    84	    if(l != NULL) {
+    85	        tailRecursivePrint(l->next);
+    86	        printf("%3d", l->value);
+    87	    }
+    88	}
+    89	
+    90	/* Function: listAddValue
+    91	 * Purpose:  Adds a value to a LinkedList
+    92	 * Argument: list  - pointer to the LinkedList to fill
+    93	 * Argument: value - the value to add to the LinkedList
+    94	 * Returns:  N/A
+    95	 */
+    96	void listAddValue(LinkedList* list, int value) {
+    97	    /* check for null pointer */
+    98	    if(list != NULL) {
+    99	        list->head = getNewLink(value, list->head);
+   100	    } else {
+   101	        perror("ERROR: listAddValue: list is NULL pointer\n");
+   102	    }
+   103	}
+   104	
+   105	/* Function: listAddArray
+   106	 * Purpose:  Adds the values of an array to a LinkedList
+   107	 * Argument: list     - pointer to the LinkedList to fill
+   108	 * Argument: array    - array to fill the LinkedList with
+   109	 * Argument: arrayLen - length of the array to fill the LinkedList with
+   110	 * Returns:  N/A
+   111	 */
+   112	void listAddArray(LinkedList* list, const int array[], int arrayLen) {
+   113	    int i = 0;
+   114	    
+   115	    /* check for null pointer */
+   116	    if(list != NULL) {
+   117	        /* loop through array filling list */
+   118	        for(i = 0; i < arrayLen; ++i) {
+   119	            listAddValue(list, array[i]);
+   120	        }
+   121	    } else {
+   122	        perror("ERROR: listAddArray: list is NULL pointer\n");
+   123	    }
+   124	}
+   125	
+   126	/* Function: listPrint
+   127	 * Purpose:  Prints the values of a LinkedList
+   128	 * Argument: list - pointer to the LinkedList to print
+   129	 * Returns:  N/A
+   130	 */
+   131	void listPrint(const LinkedList* list) {
+   132	    Link* cursor;
+   133	    
+   134	    /* check for null pointer */
+   135	    if(list != NULL) {
+   136	        for(cursor = list->head; cursor != NULL; cursor = cursor->next) {
+   137	            printf("%3d", cursor->value);
+   138	        }
+   139	        printf("\n");
+   140	    } else {
+   141	        perror("ERROR: listPrint: list is NULL pointer\n");
+   142	    }
+   143	}
+   144	
+   145	/* Function: listGetSum
+   146	 * Purpose:  Calculates and returns the sum of a LinkedList
+   147	 * Argument: list - pointer to the LinkedList to sum
+   148	 * Returns:  int containing the sum of the LinkedList
+   149	 */
+   150	int listGetSum(const LinkedList* list) {
+   151	    Link* cursor;
+   152	    int sum = 0;
+   153	    
+   154	    /* check for null pointer */
+   155	    if(list != NULL) {
+   156	        for(cursor = list->head; cursor != NULL; cursor = cursor->next) {
+   157	            sum += cursor->value;
+   158	        }
+   159	    } else {
+   160	        perror("ERROR: listGetSum: list is NULL pointer\n");
+   161	    }
+   162	
+   163	    return sum;
+   164	}
+   165	
+   166	/* Function: listFree
+   167	 * Purpose:  Frees up the space allocated to the specified LinkedList
+   168	 * Argument: list - pointer to the LinkedList to free
+   169	 * Returns:  N/A
+   170	 */
+   171	void listFree(LinkedList* list) {
+   172	    Link* dead;
+   173	
+   174	    /* check for null pointer */
+   175	    if(list != NULL) {
+   176	        /* free each item in list */
+   177	        while(list->head != NULL) {
+   178	            dead = list->head;
+   179	            list->head = dead->next;
+   180	            free(dead);
+   181	        }
+   182	    } else {
+   183	        perror("ERROR: listFree: list is NULL pointer\n");
+   184	    }
+   185	}
+sh-4.2$ gcc -ansi -Wall hancockTaylor_hw0.c
+sh-4.2$ a.out
+ -2
+  3  0 16 -4  1  7 -2
+The sum is: 21
+sh-4.2$ exit
+exit
+
+Script done on Mon 19 Sept 2022 04:08:53 PM MST
