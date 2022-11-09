@@ -2,6 +2,9 @@
 // Author: Taylor Hancock
 // Project: Assignment 4
 
+// As a note, the example solutions you show on your assignment is missing isFull in the queue data sheet, pop never says to return the value, and your example input for queue has incorrect outputs.
+// Hopefully, the text files are formatted correctly, because you told us to remove all the messages displayed to the user, so I have, meaning it may be quite hard to understand)
+
 
 #include <list> // use doubly linked lists (as included in the C++ STL)
 #include <iostream>
