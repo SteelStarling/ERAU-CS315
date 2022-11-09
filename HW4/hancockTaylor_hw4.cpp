@@ -110,6 +110,11 @@ public:
         return (linkedlist.size() == 0);
     }
 
+    // returns true if the queue is full, false otherwise
+    bool isFull() {
+        return (linkedlist.size() == maxLen);
+    }
+
     // returns the current filled length of the queue
     int size() {
         return linkedlist.size();
@@ -188,8 +193,8 @@ static void parseStack() {
         cin >> input;
 
         while(!cin) { // handle invalid input
-            cin.ignore(INT_MAX, '\n');
             cin.clear();
+            cin.ignore(INT_MAX, '\n');
 
             cout << endl << "ERROR: Invalid input, please input a valid integer!" << endl;
             printStackMenu();
@@ -222,8 +227,8 @@ static void parseStack() {
                 cin >> value;
 
                 while(!cin) { // handle invalid input
-                    cin.ignore(INT_MAX, '\n');
                     cin.clear();
+                    cin.ignore(INT_MAX, '\n');
 
                     cout << endl << "ERROR: Invalid input, please input a valid integer!" << endl;
                     cout << "Enter a value to be pushed: ";
@@ -256,26 +261,27 @@ static void parseStack() {
 static void printQueueMenu() {
     cout << "Queue Commands:" << endl
             << "   1. isEmpty()" << endl
-            << "   2. size()" << endl
-            << "   3. front()" << endl
-            << "   4. enqueue()" << endl
-            << "   5. dequeue()" << endl
-            << "   6. display()" << endl
-            << "   7. exit" << endl;
+            << "   2. isFull()" << endl
+            << "   3. size()" << endl
+            << "   4. front()" << endl
+            << "   5. enqueue()" << endl
+            << "   6. dequeue()" << endl
+            << "   7. display()" << endl
+            << "   8. exit" << endl;
 }
 
 // handle user inputs for queues
 static void parseQueue() {
     int input = 0;
     Queue q(MAX_LENGTH);
-    while(input != 7) { // loop until told to exit
+    while(input != 8) { // loop until told to exit
         printQueueMenu();
         cout << "Input your command: ";
         cin >> input;
 
         while(!cin) { // handle invalid input
-            cin.ignore(INT_MAX, '\n');
             cin.clear();
+            cin.ignore(INT_MAX, '\n');
 
             cout << "ERROR: Invalid input, please input a valid integer!" << endl;
             printQueueMenu();
@@ -290,16 +296,19 @@ static void parseQueue() {
                 cout << "isEmpty(): " << q.isEmpty() << endl;
                 break;
             case 2:
-                cout << "size(): " << q.size() << endl;
+                cout << "isFull(): " << q.isFull() << endl;
                 break;
             case 3:
+                cout << "size(): " << q.size() << endl;
+                break;
+            case 4:
                 try {
                     cout << "front(): " << q.front() << endl;
                 } catch(length_error) {
                     cout << "front() illegal because queue is empty!" << endl;
                 }
                 break;
-            case 4:
+            case 5:
                 cout << "Enter a value to be enqueued: ";
                 cin >> value;
 
@@ -319,7 +328,7 @@ static void parseQueue() {
                     cout << "enqueue() illegal because queue is full!" << endl;
                 }
                 break;
-            case 5:
+            case 6:
                 try {
                     value = q.dequeue();
                     cout << "Dequeued " << value << " from queue" << endl;
@@ -327,7 +336,7 @@ static void parseQueue() {
                     cout << "dequeue() illegal because queue is empty!" << endl;
                 }
                 break;
-            case 6:
+            case 7:
                 q.display();
                 break;
         }
@@ -336,8 +345,8 @@ static void parseQueue() {
 
 int main() {
     // comment out one to run the other (should be obvious, but I figured it warranted stating, since I did it all in one program rather than two)
-    parseStack();
-    // parseQueue();
+    //parseStack();
+    parseQueue();
 
     return 0;
 }

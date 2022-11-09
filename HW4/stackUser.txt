@@ -1,0 +1,39 @@
+1
+isEmpty(): 1
+2
+isFull(): 0
+4
+top() illegal because stack is empty!
+5
+5
+Pushed 5 onto stack
+5
+15
+Pushed 15 onto stack
+5
+30
+Pushed 30 onto stack
+5
+61
+Pushed 61 onto stack
+5
+42
+Pushed 42 onto stack
+5
+1729
+push(1729) illegal because stack is full!
+6
+Popped 42 from stack
+6
+Popped 61 from stack
+6
+Popped 30 from stack
+6
+Popped 15 from stack
+6
+Popped 5 from stack
+6
+pop() illegal because stack is empty!
+3
+size(): 0
+8

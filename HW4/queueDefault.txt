@@ -1,0 +1,47 @@
+5
+10
+Enqueued 10 into queue
+5
+20
+Enqueued 20 into queue
+5
+30
+Enqueued 30 into queue
+5
+40
+Enqueued 40 into queue
+5
+50
+Enqueued 50 into queue
+5
+60
+enqueue() illegal because queue is full!
+2
+isFull(): 1
+7
+Queue: 10, 20, 30, 40, 50
+3
+size(): 5
+6
+Dequeued 10 from queue
+6
+Dequeued 20 from queue
+3
+size(): 3
+1
+isEmpty(): 0
+6
+Dequeued 30 from queue
+4
+front(): 40
+6
+Dequeued 40 from queue
+4
+front(): 50
+6
+Dequeued 50 from queue
+6
+dequeue() illegal because queue is empty!
+1
+isEmpty(): 1
+8

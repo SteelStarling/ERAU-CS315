@@ -1,0 +1,40 @@
+5
+10
+Pushed 10 onto stack
+5
+20
+Pushed 20 onto stack
+5
+30
+Pushed 30 onto stack
+5
+40
+Pushed 40 onto stack
+5
+50
+Pushed 50 onto stack
+5
+60
+push(60) illegal because stack is full!
+2
+isFull(): 1
+6
+Popped 50 from stack
+3
+size(): 4
+6
+Popped 40 from stack
+6
+Popped 30 from stack
+3
+size(): 2
+1
+isEmpty(): 0
+6
+Popped 20 from stack
+4
+top(): 10
+6
+Popped 10 from stack
+6
+pop() illegal because stack is empty!
