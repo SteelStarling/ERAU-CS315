@@ -1,7 +1,7 @@
-# CS315-Work
+# CS315 - Data Structures & Analysis
 
-Welcome, if you're looking at this and are me, hi me!
+Here's all the work for CS315, hopefully organized somewhat well for future reference!
 
-If you're looking at this and not me, something terrible has gone wrong, or maybe I'm showing it to you from my account.
+Work by: Tay
 
-Here's all the work for CS315, hopefully organized somewhat well for your future use!
+Taught by: Dr. Abufardeh @ ERAU - Prescott, Fall 2022
